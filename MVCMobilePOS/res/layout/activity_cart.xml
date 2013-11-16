@@ -10,8 +10,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true" >
 
-        <TableRow
-            android:id="@+id/tableRow1"
+        <RelativeLayout
+            android:id="@+id/RelativeLayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dip" >
@@ -20,10 +20,24 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Catalog :"
+                android:layout_alignBaseline="@+id/TotalPrice"
+                android:layout_alignBottom="@+id/TotalPrice"
+                android:layout_toRightOf="@+id/TotalPrice"
+                android:text="0"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        </TableRow>
+            <TextView
+                android:id="@+id/TotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_span="1"
+                android:gravity="center"
+                android:text="Total : "
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -48,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.89"
-                android:text="Price"
+                android:text="Quantity"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
@@ -70,6 +84,7 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false" >
             </ListView>
+
         </LinearLayout>
 
         <View
@@ -83,14 +98,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="Back to Inventory" />
+        android:text="Back to Catalog" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Go to Cart" />
+        android:text="Check out" />
 
 </RelativeLayout>

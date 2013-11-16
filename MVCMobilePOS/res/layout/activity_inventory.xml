@@ -18,14 +18,12 @@
             android:padding="5dip" >
 
             <TextView
-                android:id="@+id/TotalPrice"
+                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_span="1"
-                android:gravity="center"
-                android:text="Inventory : "
+                android:text="Inventory :"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
+
         </TableRow>
 
         <LinearLayout
@@ -68,13 +66,13 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="302dp"
+            android:layout_height="341dp"
             android:orientation="horizontal" >
 
             <ListView
                 android:id="@+id/listView1"
                 android:layout_width="match_parent"
-                android:layout_height="273dp"
+                android:layout_height="match_parent"
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false" >
@@ -85,17 +83,6 @@
             android:layout_height="1dip"
             android:background="#CCCCCC" />
     </TableLayout>
-
-    <Button
-        android:id="@+id/button3"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/button2"
-        android:layout_marginTop="17dp"
-        android:text="@string/button_add" />
 
     <Button
         android:id="@+id/button2"
@@ -120,5 +107,15 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/button4"
         android:text="Settings" />
+
+    <Button
+        android:id="@+id/button3"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/button2"
+        android:text="@string/button_add" />
 
 </RelativeLayout>

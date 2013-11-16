@@ -38,6 +38,10 @@
             android:name="com.example.mvcmobilepos.SettingScreen"
             android:label="@string/title_activity_setting_screen" >
         </activity>
+        <activity
+            android:name="com.example.mvcmobilepos.CartScreen"
+            android:label="@string/title_activity_cart_screen" >
+        </activity>
     </application>
 
 </manifest>
