@@ -55,3 +55,8 @@ public class CatalogScreen extends Activity {
 	}
 
 }
+
+
+// myDb.InsertData(tItemID.getText().toString(), tName
+//.getText().toString(), tQuantity.getText().toString(), tPrice
+//.getText().toString());
