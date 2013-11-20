@@ -15,5 +15,9 @@
     <string name="title_activity_history_screen">HistoryScreen</string>
     <string name="title_activity_setting_screen">SettingScreen</string>
     <string name="title_activity_cart_screen">CartScreen</string>
-
+	<string-array name="CmdMenu">
+        <item>Purchase</item>
+        <item>Edit</item>
+        <item >Delete</item>
+    </string-array>
 </resources>
