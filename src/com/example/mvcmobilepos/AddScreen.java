@@ -54,7 +54,8 @@ public class AddScreen extends Activity {
 				
 			if (confirm.checkSaveData(productID,productName,productQuan,productPrice)) 
 			{
-			confirm.saveData(productID, productName, productQuan, productPrice);
+				myDb.InsertData(productID, productName, productQuan, productPrice);
+				
 				Toast.makeText(AddScreen.this, "Add Data Successfully. ",
 						Toast.LENGTH_SHORT).show();
 				Intent newActivity = new Intent(AddScreen.this,InventoryScreen.class);

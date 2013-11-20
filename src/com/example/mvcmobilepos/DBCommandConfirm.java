@@ -17,10 +17,11 @@ public class DBCommandConfirm extends Activity {
 
 	final DBClass myDb = new DBClass(this);
 	
-	public void saveData(String productID, String productName, String productQuan, String productPrice)
-	{
-			myDb.InsertData(productID, productName, productQuan, productPrice);
-	}
+//	public void saveData(String productID, String productName, String productQuan, String productPrice)
+//	{
+//		final DBClass myDb = new DBClass(this);
+//			myDb.InsertData(productID, productName, productQuan, productPrice);
+//	}
 	//Check for save
 	public boolean checkSaveData(String productID, String productName, String productQuan, String productPrice) {
 
