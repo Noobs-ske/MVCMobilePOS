@@ -52,24 +52,16 @@ public class AddScreen extends Activity {
 				String productQuan = tQuantity.getText().toString();
 				String productPrice = tPrice.getText().toString();
 				
-
-			// If Save Complete if (SaveData()) { // Open Form Main Intent
-				myDb.InsertData(productID, productName, productQuan, productPrice);
-				ad.setMessage("Saved");
-				ad.show();
+			if (confirm.checkSaveData(productID,productName,productQuan,productPrice)) 
+			{
+			confirm.saveData(productID, productName, productQuan, productPrice);
+				Toast.makeText(AddScreen.this, "Add Data Successfully. ",
+						Toast.LENGTH_SHORT).show();
 				Intent newActivity = new Intent(AddScreen.this,InventoryScreen.class);
 				startActivity(newActivity);
-				
-//			if (confirm.checkSaveData(productID,productName,productQuan,productPrice))
-//				{
-//					
-//					confirm.SaveData(productID, productName, productQuan, productPrice);
-//					ad.setMessage("Saved");
-//					ad.show();
-//					Intent newActivity2 = new Intent(AddScreen.this,
-//							InventoryScreen.class);
-//					startActivity(newActivity);
-//				}
+			}
+				else {ad.setMessage("Invalid. A field is missing or the Product ID is already in used."); ad.show();}
+
 			}
 		}
 	);

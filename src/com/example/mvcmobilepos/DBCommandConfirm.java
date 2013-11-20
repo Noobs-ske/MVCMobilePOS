@@ -17,12 +17,9 @@ public class DBCommandConfirm extends Activity {
 
 	final DBClass myDb = new DBClass(this);
 	
-	public void SaveData(String productID, String productName, String productQuan, String productPrice)
+	public void saveData(String productID, String productName, String productQuan, String productPrice)
 	{
-		if(checkSaveData(productID, productName, productQuan, productPrice))
-		{
-		//	myDb.InsertData(productID, productName, productQuan, productPrice);
-		}
+			myDb.InsertData(productID, productName, productQuan, productPrice);
 	}
 	//Check for save
 	public boolean checkSaveData(String productID, String productName, String productQuan, String productPrice) {
@@ -33,34 +30,24 @@ public class DBCommandConfirm extends Activity {
 		String quan = productQuan;
 		String price = productPrice;
 		// Dialog
-//		final AlertDialog.Builder adb = new AlertDialog.Builder(this);
-//		AlertDialog ad = adb.create();
 
 		// Check MemberID
 		if (id.length() == 0) {
-//			ad.setMessage("Please input [ID] ");
-//			ad.show();
 			return false;
 		}
 
 		// Check Name
 		if (name.length() == 0) {
-//			ad.setMessage("Please input [Name] ");
-//			ad.show();
 			return false;
 		}
 
 		// Check Quantity
 		if (quan.length() == 0) {
-	//		ad.setMessage("Please input [Quantity] ");
-	//		ad.show();
 			return false;
 		}
 
 		// Check Price
 		if (price.length() == 0) {
-	//		ad.setMessage("Please input [Price] ");
-	//		ad.show();
 			return false;
 		}
 
@@ -70,13 +57,10 @@ public class DBCommandConfirm extends Activity {
 		// Check Data (MemberID exists)
 		String arrData[] = myDb.SelectData(id);
 		if (arrData != null) {
-	//		ad.setMessage("ItemID already exists!  ");
-	//		ad.show();
 			return false;
 		}
 
-		Toast.makeText(DBCommandConfirm.this, "Add Data Successfully. ",
-				Toast.LENGTH_SHORT).show();
+
 
 		return true;
 
