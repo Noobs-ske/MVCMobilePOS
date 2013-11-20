@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mvcmobilepos"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="18" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Light" >
+        <activity
+            android:name="com.example.mvcmobilepos.InventoryScreen"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.mvcmobilepos.CatalogScreen"
+            android:label="@string/title_activity_catalog_screen" >
+        </activity>
+        <activity
+            android:name="com.example.mvcmobilepos.AddScreen"
+            android:label="@string/title_activity_add_screen" >
+        </activity>
+        <activity
+            android:name="com.example.mvcmobilepos.HistoryScreen"
+            android:label="@string/title_activity_history_screen" >
+        </activity>
+        <activity
+            android:name="com.example.mvcmobilepos.SettingScreen"
+            android:label="@string/title_activity_setting_screen" >
+        </activity>
+        <activity
+            android:name="com.example.mvcmobilepos.CartScreen"
+            android:label="@string/title_activity_cart_screen" >
+        </activity>
+    </application>
+
+</manifest>
