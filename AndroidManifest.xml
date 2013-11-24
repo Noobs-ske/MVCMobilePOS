@@ -30,7 +30,6 @@
             android:name="com.example.mvcmobilepos.AddScreen"
             android:label="@string/title_activity_add_screen" >
         </activity>
-        
         <activity
             android:name="com.example.mvcmobilepos.HistoryScreen"
             android:label="@string/title_activity_history_screen" >
@@ -42,6 +41,10 @@
         <activity
             android:name="com.example.mvcmobilepos.CartScreen"
             android:label="@string/title_activity_cart_screen" >
+        </activity>
+        <activity
+            android:name="com.example.mvcmobilepos.UpdateScreen"
+            android:label="@string/title_activity_update_screen" >
         </activity>
     </application>
 

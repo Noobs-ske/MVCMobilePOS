@@ -39,10 +39,7 @@ public class InventoryScreen extends Activity {
 		// Call Show List All Data
 		ShowListData();
 		
-		
-		
-		
-		
+	
 		// Button2(CatalogButton)
 		final Button btn_Catalog = (Button) findViewById(R.id.button2);
 		// Perform action on click
@@ -122,7 +119,7 @@ public class InventoryScreen extends Activity {
 		menu.setHeaderTitle("Command for : "
 				+ ItemList.get(info.position).get("Name").toString());
 		String[] menuItems = getResources().getStringArray(R.array.CmdMenu);
-		for (int i = 0; i < menuItems.length; i++) {
+		for (int i = 1; i < menuItems.length; i++) {
 			menu.add(Menu.NONE, i, i, menuItems[i]);
 		}
 
@@ -139,81 +136,13 @@ public class InventoryScreen extends Activity {
 		final String MemName = ItemList.get(info.position).get("Name").toString();
 		final String MemQuantity = ItemList.get(info.position).get("Quantity").toString();
 		final String MemPrice = ItemList.get(info.position).get("Price").toString();
-		// Check Event Command
-		if ("Purchase".equals(CmdName)) {
-			boolean check = true;
-			for (int i = 0; i < PurchaseList.size(); i++) {
-				if (PurchaseList.get(i).equals(MemID)) {
-					check = false;
-					break;
-				}
-
-			}
-			if (check){
-				PurchaseList.add(MemID);
-
-		        AlertDialog.Builder alert = new AlertDialog.Builder(this);  
-
-		        alert.setTitle("Quantity");  
-		        alert.setMessage("Please input the number");  
-
-		        // Set an EditText view to get user input   
-		        final EditText inputQuantity = new EditText(this);  
-		        alert.setView(inputQuantity);  
-
-		        alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {  
-		        public void onClick(DialogInterface dialog, int whichButton) {  
-		        	
-		        	
-		        	try{
-		            PurchaseQuantity = Integer.parseInt(inputQuantity.getText().toString());
-		           
-		            int n = Integer.parseInt(MemQuantity)- PurchaseQuantity;
-		        //    double m = n*(Double.parseDouble(MemPrice)/Double.parseDouble(MemQuantity)) ;
-		        //    String n2 = n+"";
-		        //    String price = m+"";
-		            if(PurchaseQuantity > Integer.parseInt(MemQuantity))
-		            {
-		            	Toast.makeText(getBaseContext(),
-								"Not enough item in stock",
-								Toast.LENGTH_LONG).show();
-		            }
-		            else           myDb.reduceQuantity(MemID, MemName, Integer.parseInt(MemQuantity), PurchaseQuantity, MemPrice);
 		
-		//            if(Integer.parseInt(n2) <= 0)
-		//            {
-		//           	m2 = "0";
-		//            }
-		//            myDb.UpdateData(MemID, MemName, n2, m2);
-		            
-		            
-		            ShowListData();
-		        	}
-		        	catch(Exception e){
-		        		Toast.makeText(getBaseContext(),
-								"INPUT THE NUMBER MORON !!",
-								Toast.LENGTH_LONG).show();
-		        	}
-		          }  
-		        }); 
-		        
-		        alert.setNegativeButton("Cancel", null );
 
-		        alert.show();
-				
-		        
-			}
-			else {
-				Toast.makeText(InventoryScreen.this,
-						"You're already Purchase.", Toast.LENGTH_LONG).show();
-			}
-		}
-
-		else if ("Edit".equals(CmdName)) {
+		if ("Edit".equals(CmdName)) {
 
 			// Show on new activity
 			Intent newActivity = new Intent(InventoryScreen.this,
-					DBCommandConfirm.class);
+					UpdateScreen.class);
 			newActivity.putExtra("MemID",
 					ItemList.get(info.position).get("ItemID").toString());
 			startActivity(newActivity);
