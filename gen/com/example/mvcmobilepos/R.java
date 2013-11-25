@@ -65,11 +65,12 @@ public final class R {
         public static final int activity_add=0x7f030000;
         public static final int activity_cart=0x7f030001;
         public static final int activity_catalog=0x7f030002;
-        public static final int activity_column=0x7f030003;
-        public static final int activity_history=0x7f030004;
-        public static final int activity_inventory=0x7f030005;
-        public static final int activity_setting=0x7f030006;
-        public static final int activity_update=0x7f030007;
+        public static final int activity_catalogcolumn=0x7f030003;
+        public static final int activity_column=0x7f030004;
+        public static final int activity_history=0x7f030005;
+        public static final int activity_inventory=0x7f030006;
+        public static final int activity_setting=0x7f030007;
+        public static final int activity_update=0x7f030008;
     }
     public static final class menu {
         public static final int add_screen=0x7f080000;

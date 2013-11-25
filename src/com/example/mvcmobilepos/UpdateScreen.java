@@ -1,7 +1,5 @@
 package com.example.mvcmobilepos;
 
-
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
