@@ -3,19 +3,31 @@ package com.example.mvcmobilepos;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.example.mvcmobilepos.DBClass;
+import com.example.mvcmobilepos.R;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 public class CatalogScreen extends Activity {
 
 	private ArrayList<HashMap<String, String>> ItemList;
-
+	private int PurchaseQuantity = 0;
+	ArrayList<String> PurchaseList = new ArrayList<String>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,6 +75,125 @@ public class CatalogScreen extends Activity {
 		return true;
 	}
 	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+		menu.setHeaderTitle("Command for : "
+				+ ItemList.get(info.position).get("Name").toString());
+		String[] menuItems = getResources().getStringArray(R.array.CmdMenu);
+		for (int i = 0; i < menuItems.length; i++) {
+			menu.add(Menu.NONE, i, i, menuItems[i]);
+		}
+
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		final DBClass myDb = new DBClass(this);
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+				.getMenuInfo();
+		int menuItemIndex = item.getItemId();
+		String[] menuItems = getResources().getStringArray(R.array.CmdMenu);
+		String CmdName = menuItems[menuItemIndex];
+		final String MemID = ItemList.get(info.position).get("ItemID").toString();
+		final String MemName = ItemList.get(info.position).get("Name").toString();
+		final String MemQuantity = ItemList.get(info.position).get("Quantity").toString();
+		final String MemPrice = ItemList.get(info.position).get("Price").toString();
+		// Check Event Command
+		if ("Purchase".equals(CmdName)) {
+			boolean check = true;
+			for (int i = 0; i < PurchaseList.size(); i++) {
+				if (PurchaseList.get(i).equals(MemID)) {
+					check = false;
+					break;
+				}
+
+			}
+			if (check){
+				PurchaseList.add(MemID);
+
+		        AlertDialog.Builder alert = new AlertDialog.Builder(this);  
+
+		        alert.setTitle("Quantity");  
+		        alert.setMessage("Please input the number");  
+
+		        // Set an EditText view to get user input   
+		        final EditText inputQuantity = new EditText(this);  
+		        alert.setView(inputQuantity);  
+
+		        alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {  
+		        public void onClick(DialogInterface dialog, int whichButton) {  
+		        	
+		        	
+		        	try{
+		            PurchaseQuantity = Integer.parseInt(inputQuantity.getText().toString());
+		           
+		            int n = Integer.parseInt(MemQuantity)- PurchaseQuantity;
+		        //    double m = n*(Double.parseDouble(MemPrice)/Double.parseDouble(MemQuantity)) ;
+		//           String n2 = n+"";
+		        //    String price = m+"";
+		            if(PurchaseQuantity > Integer.parseInt(MemQuantity))
+		            {
+		            	Toast.makeText(getBaseContext(),
+								"Not enough item in stock",
+								Toast.LENGTH_LONG).show();
+		            }
+		            else           myDb.reduceQuantity(MemID, MemName, Integer.parseInt(MemQuantity), PurchaseQuantity, MemPrice);
+		
+		//            if(Integer.parseInt(n2) <= 0)
+		//            {
+		//           	m2 = "0";
+		//            }
+		//            myDb.UpdateData(MemID, MemName, n2, m2);
+		            
+		            
+		            ShowListData();
+		        	}
+		        	catch(Exception e){
+		        		Toast.makeText(getBaseContext(),
+								"INPUT THE NUMBER MORON !!",
+								Toast.LENGTH_LONG).show();
+		        	}
+		          }  
+		        }); 
+		        
+		        alert.setNegativeButton("Cancel", null );
+
+		        alert.show();
+				
+		        
+			}
+			else {
+				Toast.makeText(CatalogScreen.this,
+						"You're already Purchase.", Toast.LENGTH_LONG).show();
+			}
+		}
+
+
+			// for Delete Command
+		 else if ("Delete".equals(CmdName)) {
+
+//			DBClass myDb = new DBClass(this);
+
+			long flg = myDb.DeleteData(MemID);
+			if (flg > 0) {
+				Toast.makeText(CatalogScreen.this,
+						"Delete Data Successfully", Toast.LENGTH_LONG).show();
+			} else {
+				Toast.makeText(CatalogScreen.this, "Delete Data Failed.",
+						Toast.LENGTH_LONG).show();
+			}
+
+			// Call Show Data again
+			ShowListData();
+		}
+
+		return true;
+	
+	}
+	
 	public void ShowListData() {
 		final DBClass myDb = new DBClass(this);
 		ItemList = myDb.SelectAllData();
@@ -80,6 +211,7 @@ public class CatalogScreen extends Activity {
 	}
 
 }
+
 
 
 // myDb.InsertData(tItemID.getText().toString(), tName
