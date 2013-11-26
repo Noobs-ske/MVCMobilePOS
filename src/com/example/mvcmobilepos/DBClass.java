@@ -240,4 +240,13 @@ public class DBClass extends SQLiteOpenHelper {
 		UpdateData(ID, name, left2, price);
 	}
 
+	public void increaseQuantity(String ID ,String name , int current , int purchase, String price)
+	{
+		int currentquan = current;
+		int purchasequan = purchase;
+		int newquan = currentquan + purchasequan;
+		String newquan2 = newquan+"";
+		UpdateData(ID, name, newquan2, price);
+	}
+	
 }
