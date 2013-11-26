@@ -53,12 +53,13 @@ public class UpdateScreen extends Activity {
 	}
 
 	public void ShowData(String MemID) {
-		// txtMemberID, txtName, txtTel
+		// txtMemberID, txtName, txtTel, txtDesc
 		final TextView tItemID = (TextView) findViewById(R.id.txtItemID);
 		final EditText tName = (EditText) findViewById(R.id.txtName);
 		final EditText tQuantity = (EditText) findViewById(R.id.txtQuantity);
 		final EditText tPrice = (EditText) findViewById(R.id.txtPrice);
-
+		final EditText tDescription = (EditText) findViewById(R.id.txtDescription);
+		
 		// new Class DB
 		final DBClass myDb = new DBClass(this);
 
@@ -79,7 +80,7 @@ public class UpdateScreen extends Activity {
 		final EditText tName = (EditText) findViewById(R.id.txtName);
 		final EditText tQuantity = (EditText) findViewById(R.id.txtQuantity);
 		final EditText tPrice = (EditText) findViewById(R.id.txtPrice);
-
+		final EditText tDescription = (EditText) findViewById(R.id.txtDescription);
 		// Dialog
 		final AlertDialog.Builder adb = new AlertDialog.Builder(this);
 		AlertDialog ad = adb.create();

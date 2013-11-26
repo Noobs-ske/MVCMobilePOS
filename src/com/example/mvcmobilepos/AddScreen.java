@@ -21,7 +21,8 @@ public class AddScreen extends Activity {
 	private EditText tName;
 	private EditText tQuantity;
 	private EditText tPrice;
-
+	private EditText tDescription;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,7 +31,8 @@ public class AddScreen extends Activity {
 		tName = (EditText) findViewById(R.id.txtName);
 		tQuantity = (EditText) findViewById(R.id.txtQuantity);
 		tPrice = (EditText) findViewById(R.id.txtPrice);
-		 
+		tDescription = (EditText) findViewById(R.id.txtDescription);
+		
 		// connect btnScan and txtResult to View
 		btnScan = (Button) findViewById(R.id.buttonScan);
 		txtResult = (EditText) findViewById(R.id.txtItemID);
@@ -51,10 +53,12 @@ public class AddScreen extends Activity {
 				String productName = tName.getText().toString();
 				String productQuan = tQuantity.getText().toString();
 				String productPrice = tPrice.getText().toString();
+				String productDescription = tDescription.getText().toString();
+				if (productDescription == null) productDescription = "";
 				
 			if (confirm.checkSaveData(productID,productName,productQuan,productPrice)) 
 			{
-				myDb.InsertData(productID, productName, productQuan, productPrice);
+				myDb.InsertData(productID, productName, productQuan, productPrice, productDescription);
 				
 				Toast.makeText(AddScreen.this, "Add Data Successfully. ",
 						Toast.LENGTH_SHORT).show();

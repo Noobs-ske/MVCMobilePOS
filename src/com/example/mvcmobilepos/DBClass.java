@@ -3,6 +3,7 @@ package com.example.mvcmobilepos;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -34,14 +35,14 @@ public class DBClass extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE " + TABLE_PRODUCT
 				+ "(ItemID INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " Name TEXT(100)," + " Quantity TEXT(100), " 
-				+ " Price TEXT(100));");
+				+ " Price TEXT(100)," + " Description TEXT(100));");
 		
 
 		Log.d("CREATE TABLE", "Create Table Successfully.");
 	}
 
 	// Insert Data
-	public long InsertData(String strItemID, String strName, String strQuantity, String strPrice) {
+	public long InsertData(String strItemID, String strName, String strQuantity, String strPrice, String strDescription) {
 		// TODO Auto-generated method stub
 
 		try {
@@ -64,7 +65,7 @@ public class DBClass extends SQLiteOpenHelper {
 			Val.put("Name", strName);
 			Val.put("Quantity", strQuantity);
 			Val.put("Price", strPrice);
-
+			Val.put("Description",strDescription);
 			long rows = db.insert(TABLE_PRODUCT, null, Val);
 
 			db.close();
@@ -77,6 +78,7 @@ public class DBClass extends SQLiteOpenHelper {
 	}
 
 	// Select Data
+	@SuppressLint("NewApi")
 	public String[] SelectData(String strItemID) {
 		// TODO Auto-generated method stub
 
@@ -86,20 +88,21 @@ public class DBClass extends SQLiteOpenHelper {
 			SQLiteDatabase db;
 			db = this.getReadableDatabase(); // Read Data
 
-			Cursor cursor = db.query(TABLE_PRODUCT, new String[] { "*" },
+			Cursor cursor = db.query(false, TABLE_PRODUCT, new String[] { "*" },
 					"ItemID=?", new String[] { String.valueOf(strItemID) },
-					null, null, null, null);
+					null, null, null, null,null);
 
 			if (cursor != null) {
 				if (cursor.moveToFirst()) {
 					arrData = new String[cursor.getColumnCount()];
 					/***
-					 * 0 = ItemID , 1 = Name , 2 = Quantity , 3 = Price
+					 * 0 = ItemID , 1 = Name , 2 = Quantity , 3 = Price , 4 = Description
 					 */
 					arrData[0] = cursor.getString(0);
 					arrData[1] = cursor.getString(1);
 					arrData[2] = cursor.getString(2);
 					arrData[3] = cursor.getString(3);
+					arrData[4] = cursor.getString(4);
 				}
 			}
 			cursor.close();
