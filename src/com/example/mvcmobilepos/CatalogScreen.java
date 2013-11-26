@@ -58,6 +58,8 @@ public class CatalogScreen extends Activity {
 
 				Intent newActivity = new Intent(CatalogScreen.this,
 						CartScreen.class);
+				newActivity.putStringArrayListExtra("PurchaseList",
+						PurchaseList);
 				
 				startActivity(newActivity);
 				finish();
