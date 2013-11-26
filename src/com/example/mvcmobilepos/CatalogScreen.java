@@ -33,7 +33,7 @@ public class CatalogScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_catalog);
 		
-		ShowListData();
+	  	ShowListData();
 		
 		//back to inventory button
 		final Button btn_Invntory = (Button) findViewById(R.id.button2);
