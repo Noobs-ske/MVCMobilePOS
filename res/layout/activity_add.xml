@@ -109,7 +109,7 @@
             android:inputType="number|numberDecimal" >
         </EditText>
     </TableRow>
-    
+
     <TableRow
         android:id="@+id/tableRow6"
         android:layout_width="wrap_content"
@@ -118,6 +118,7 @@
 
         <TextView
             android:id="@+id/textView6"
+            android:layout_height="match_parent"
             android:text="Desc"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -125,17 +126,18 @@
             android:id="@+id/txtDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10" >
+            android:ems="10"
+            android:gravity="left"
+            android:lines="4"
+            android:maxLines="4" >
 
         </EditText>
     </TableRow>
-    
-    
-    
+
     <LinearLayout
         android:id="@+id/LinearLayout1"
         android:layout_width="wrap_content"
-        android:layout_height="56dp"
+        android:layout_height="57dp"
         android:baselineAligned="true"
         android:padding="5dip" >
 

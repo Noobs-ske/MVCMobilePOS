@@ -99,8 +99,8 @@ public class CartScreen extends Activity {
 
 		SimpleAdapter sAdap;
 		sAdap = new SimpleAdapter(CartScreen.this, ItemList,
-				R.layout.activity_catalogcolumn, new String[] { "ItemID",
-						"Name","Quantity" }, new int[] { R.id.ColItemID, R.id.ColName,
+				R.layout.activity_cartcolumn, new String[] { "ItemID",
+						"Name","Quantity"}, new int[] { R.id.ColItemID, R.id.ColName,
 						R.id.ColQuantity});
 		lisView1.setAdapter(sAdap);
 		registerForContextMenu(lisView1);

@@ -85,9 +85,9 @@ public class CatalogScreen extends Activity {
 		menu.setHeaderTitle("Command for : "
 				+ ItemList.get(info.position).get("Name").toString());
 		String[] menuItems = getResources().getStringArray(R.array.CmdMenu);
-		for (int i = 0; i < menuItems.length; i++) {
+		int i = 0;
 			menu.add(Menu.NONE, i, i, menuItems[i]);
-		}
+		
 
 	}
 
