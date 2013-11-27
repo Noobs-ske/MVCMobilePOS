@@ -146,7 +146,7 @@ public class CatalogScreen extends Activity {
 		            else {       
 		            	PurchaseList.add(MemID);
 //		            		myDb.reduceQuantity(MemID, MemName, Integer.parseInt(MemQuantity), PurchaseQuantity, MemPrice);
-//		            		myDb.InsertData2(MemID, MemName, PurQuantity, MemPrice);
+		            		myDb.InsertData2(MemID, MemName, PurQuantity, MemPrice);
 		            		//ShowListData();
 		//            if(Integer.parseInt(n2) <= 0)
 		//            {
