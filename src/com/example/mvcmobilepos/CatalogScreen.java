@@ -114,7 +114,7 @@ public class CatalogScreen extends Activity {
 
 			}
 			if (check){
-				PurchaseList.add(MemID);
+				
 
 		        AlertDialog.Builder alert = new AlertDialog.Builder(this);  
 
@@ -143,9 +143,10 @@ public class CatalogScreen extends Activity {
 								"Not enough item in stock",
 								Toast.LENGTH_LONG).show();
 		            }
-		            else {          
-		            		myDb.reduceQuantity(MemID, MemName, Integer.parseInt(MemQuantity), PurchaseQuantity, MemPrice);
-		            		myDb.InsertData2(MemID, MemName, PurQuantity, MemPrice);
+		            else {       
+		            	PurchaseList.add(MemID);
+//		            		myDb.reduceQuantity(MemID, MemName, Integer.parseInt(MemQuantity), PurchaseQuantity, MemPrice);
+//		            		myDb.InsertData2(MemID, MemName, PurQuantity, MemPrice);
 		            		//ShowListData();
 		//            if(Integer.parseInt(n2) <= 0)
 		//            {
