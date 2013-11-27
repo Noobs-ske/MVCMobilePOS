@@ -26,6 +26,9 @@ public class DBClass extends SQLiteOpenHelper {
 	// Table Name
 	private static final String TABLE_PURCHASE = "Purchase";
 
+	// Table Name
+		private static final String TABLE_HISTORY = "History";
+		
 	public DBClass(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		// TODO Auto-generated constructor stub
@@ -43,6 +46,11 @@ public class DBClass extends SQLiteOpenHelper {
 				+ "(ItemID2 INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " Name TEXT(100)," + " Quantity TEXT(100), " 
 				+ " Price TEXT(100)," + " Description TEXT(100));");
+		db.execSQL("CREATE TABLE " + TABLE_HISTORY
+				+ "(ItemID3 INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ " Name TEXT(100)," + " Quantity TEXT(100), " 
+				+ " Price TEXT(100)," + " Description TEXT(100));");
+		
 		
 
 		Log.d("CREATE TABLE", "Create Table Successfully.");
@@ -121,6 +129,44 @@ public class DBClass extends SQLiteOpenHelper {
 	}
 	
 	
+	
+	
+	// Insert History Data
+		public long InsertData3(String strItemID, String strName, String strQuantity, String strPrice) {
+			// TODO Auto-generated method stub
+
+			try {
+				SQLiteDatabase db;
+				db = this.getWritableDatabase(); // Write Data
+
+				/**
+				 * for API 11 and above SQLiteStatement insertCmd; String strSQL =
+				 * "INSERT INTO " + TABLE_MEMBER +
+				 * "(ItemID,Name,Quantity,Price) VALUES (?,?,?)";
+				 * 
+				 * insertCmd = db.compileStatement(strSQL); insertCmd.bindString(1,
+				 * strItemID); insertCmd.bindString(2, strName);
+				 * insertCmd.bindString(3, strTel); return
+				 * insertCmd.executeInsert();
+				 */
+
+				ContentValues Val = new ContentValues();
+				Val.put("ItemID3", strItemID);
+				Val.put("Name", strName);
+				Val.put("Quantity", strQuantity);
+				Val.put("Price", strPrice);
+				//Val.put("Description",strDescription);
+				long rows = db.insert(TABLE_HISTORY, null, Val);
+
+				db.close();
+				return rows; // return rows inserted.
+
+			} catch (Exception e) {
+				return -1;
+			}
+
+		}
+	
 
 	// Select Data
 	@SuppressLint("NewApi")
@@ -198,6 +244,45 @@ public class DBClass extends SQLiteOpenHelper {
 
 	}
 
+	
+	@SuppressLint("NewApi")
+	public String[] SelectData3(String strItemID) {
+		// TODO Auto-generated method stub
+
+		try {
+			String arrData[] = null;
+
+			SQLiteDatabase db;
+			db = this.getReadableDatabase(); // Read Data
+
+			Cursor cursor = db.query(false, TABLE_HISTORY, new String[] { "*" },
+					"ItemID3=?", new String[] { String.valueOf(strItemID) },
+					null, null, null, null,null);
+
+			if (cursor != null) {
+				if (cursor.moveToFirst()) {
+					arrData = new String[cursor.getColumnCount()];
+					/***
+					 * 0 = ItemID , 1 = Name , 2 = Quantity , 3 = Price , 4 = Description
+					 */
+					arrData[0] = cursor.getString(0);
+					arrData[1] = cursor.getString(1);
+					arrData[2] = cursor.getString(2);
+					arrData[3] = cursor.getString(3);
+					arrData[4] = cursor.getString(4);
+				}
+			}
+			cursor.close();
+			db.close();
+			return arrData;
+
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	
 	// Delete Data
 	public long DeleteData(String strItemID) {
 		// TODO Auto-generated method stub
@@ -263,6 +348,39 @@ public class DBClass extends SQLiteOpenHelper {
 
 		}
 
+		
+		// Delete Data
+				public long DeleteData3(String strItemID) {
+					// TODO Auto-generated method stub
+
+					try {
+
+						SQLiteDatabase db;
+						db = this.getWritableDatabase(); // Write Data
+
+						/**
+						 * for API 11 and above SQLiteStatement insertCmd; String strSQL =
+						 * "DELETE FROM " + TABLE_PRODUCT + " WHERE ItemID = ? ";
+						 * 
+						 * insertCmd = db.compileStatement(strSQL); insertCmd.bindString(1,
+						 * strItemID);
+						 * 
+						 * return insertCmd.executeUpdateDelete();
+						 * 
+						 */
+
+						long rows = db.delete(TABLE_HISTORY, "ItemID3 = ?",
+								new String[] { String.valueOf(strItemID) });
+
+						db.close();
+						return rows; // return rows deleted.
+
+					} catch (Exception e) {
+						return -1;
+					}
+
+				}
+		
 	// Show All Data
 	public ArrayList<HashMap<String, String>> SelectAllData() {
 		// TODO Auto-generated method stub
@@ -336,6 +454,45 @@ public class DBClass extends SQLiteOpenHelper {
 			}
 
 		}
+		
+		
+		
+		// Show All Data
+				public ArrayList<HashMap<String, String>> SelectAllData3() {
+					// TODO Auto-generated method stub
+
+					try {
+
+						ArrayList<HashMap<String, String>> MyArrList = new ArrayList<HashMap<String, String>>();
+						HashMap<String, String> map;
+
+						SQLiteDatabase db;
+						db = this.getReadableDatabase(); // Read Data
+
+						String strSQL = "SELECT  * FROM " + TABLE_PURCHASE;
+						Cursor cursor = db.rawQuery(strSQL, null);
+
+						if (cursor != null) {
+							if (cursor.moveToFirst()) {
+								do {
+									map = new HashMap<String, String>();
+									map.put("ItemID3", cursor.getString(0));
+									map.put("Name", cursor.getString(1));
+									map.put("Quantity", cursor.getString(2));
+									map.put("Price", cursor.getString(3));
+									MyArrList.add(map);
+								} while (cursor.moveToNext());
+							}
+						}
+						cursor.close();
+						db.close();
+						return MyArrList;
+
+					} catch (Exception e) {
+						return null;
+					}
+
+				}
 
 	// Update Data
 	public long UpdateData(String strItemID, String strName, String strQuantity, String strPrice) {

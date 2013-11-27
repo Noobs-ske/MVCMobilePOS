@@ -33,17 +33,18 @@ public final class R {
         public static final int LinearLayout1=0x7f090013;
         public static final int RelativeLayout1=0x7f090016;
         public static final int TotalPrice=0x7f090002;
-        public static final int action_settings=0x7f090022;
+        public static final int action_settings=0x7f090023;
         public static final int btnCancel=0x7f090015;
         public static final int btnSave=0x7f090014;
         public static final int button1=0x7f09001c;
         public static final int button2=0x7f09001b;
         public static final int button3=0x7f090020;
-        public static final int button4=0x7f090021;
+        public static final int button4=0x7f090022;
         public static final int button6=0x7f09001f;
         public static final int buttonScan=0x7f090006;
         public static final int linearLayout1=0x7f09001d;
         public static final int listView1=0x7f09001a;
+        public static final int listView2=0x7f090021;
         public static final int tableLayout1=0x7f090000;
         public static final int tableRow1=0x7f090001;
         public static final int tableRow2=0x7f090003;
@@ -71,9 +72,10 @@ public final class R {
         public static final int activity_catalogcolumn=0x7f030004;
         public static final int activity_column=0x7f030005;
         public static final int activity_history=0x7f030006;
-        public static final int activity_inventory=0x7f030007;
-        public static final int activity_setting=0x7f030008;
-        public static final int activity_update=0x7f030009;
+        public static final int activity_historycolumn=0x7f030007;
+        public static final int activity_inventory=0x7f030008;
+        public static final int activity_setting=0x7f030009;
+        public static final int activity_update=0x7f03000a;
     }
     public static final class menu {
         public static final int add_screen=0x7f080000;
