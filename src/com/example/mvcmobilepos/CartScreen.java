@@ -24,6 +24,7 @@ public class CartScreen extends Activity {
 
 	private ArrayList<HashMap<String, String>> ItemList;
 	ArrayList<String> SaleList;
+	ArrayList<String> CartList = new ArrayList<String>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,11 +68,11 @@ public class CartScreen extends Activity {
 
 	
 	public void Checkout() {
-//		DBClass myDb = new DBClass(this);
+		DBClass myDb = new DBClass(this);
 
-//		for (int i = 0; i < SaleList.size(); i++) {
-//			myDb.DeleteData(SaleList.get(i));
-//		}
+		for (int i = 0; i < SaleList.size(); i++) {
+			myDb.DeleteData2(SaleList.get(i));
+		}
 		SaleList = null;
 
 	}
@@ -84,9 +85,9 @@ public class CartScreen extends Activity {
 
 		DBClass myDb = new DBClass(this);
 		for (int i = 0; i < SaleList.size(); i++) {
-			String arrData[] = myDb.SelectData(SaleList.get(i));
+			String arrData[] = myDb.SelectData2(SaleList.get(i));
 			map = new HashMap<String, String>();
-			map.put("ItemID", arrData[0]);
+			map.put("ItemID2", arrData[0]);
 			map.put("Name", arrData[1]);
 			map.put("Quantity", arrData[2]);
 			map.put("Price", arrData[3]);
@@ -99,7 +100,7 @@ public class CartScreen extends Activity {
 
 		SimpleAdapter sAdap;
 		sAdap = new SimpleAdapter(CartScreen.this, ItemList,
-				R.layout.activity_cartcolumn, new String[] { "ItemID",
+				R.layout.activity_cartcolumn, new String[] { "ItemID2",
 						"Name","Quantity"}, new int[] { R.id.ColItemID, R.id.ColName,
 						R.id.ColQuantity});
 		lisView1.setAdapter(sAdap);
@@ -129,6 +130,7 @@ public class CartScreen extends Activity {
 		String CmdName = menuItems[menuItemIndex];
 		String MemID = ItemList.get(info.position).get("MemberID").toString();
 		String MemName = ItemList.get(info.position).get("Name").toString();
+		
 
 		if ("Delete".equals(CmdName)) {
 

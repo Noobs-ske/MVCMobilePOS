@@ -136,22 +136,26 @@ public class CatalogScreen extends Activity {
 		        //    double m = n*(Double.parseDouble(MemPrice)/Double.parseDouble(MemQuantity)) ;
 		//           String n2 = n+"";
 		        //    String price = m+"";
+		            String PurQuantity = PurchaseQuantity+""; 
 		            if(PurchaseQuantity > Integer.parseInt(MemQuantity))
 		            {
 		            	Toast.makeText(getBaseContext(),
 								"Not enough item in stock",
 								Toast.LENGTH_LONG).show();
 		            }
-		            else           myDb.reduceQuantity(MemID, MemName, Integer.parseInt(MemQuantity), PurchaseQuantity, MemPrice);
-		
+		            else {          
+		            		myDb.reduceQuantity(MemID, MemName, Integer.parseInt(MemQuantity), PurchaseQuantity, MemPrice);
+		            		myDb.InsertData2(MemID, MemName, PurQuantity, MemPrice);
+		            		//ShowListData();
 		//            if(Integer.parseInt(n2) <= 0)
 		//            {
 		//           	m2 = "0";
 		//            }
 		//            myDb.UpdateData(MemID, MemName, n2, m2);
 		            
-		            
-		            ShowListData();
+		            	}
+		            		
+		            	
 		        	}
 		        	catch(Exception e){
 		        		Toast.makeText(getBaseContext(),
