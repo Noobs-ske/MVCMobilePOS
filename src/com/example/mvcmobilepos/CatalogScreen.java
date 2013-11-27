@@ -32,9 +32,9 @@ public class CatalogScreen extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_catalog);
-		
 	  	ShowListData();
-		
+	  	Intent intent = getIntent();
+	  	PurchaseList = intent.getStringArrayListExtra("PurchaseList");
 		//back to inventory button
 		final Button btn_Invntory = (Button) findViewById(R.id.button2);
 		// Perform action on click
