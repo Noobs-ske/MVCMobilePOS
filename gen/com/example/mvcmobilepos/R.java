@@ -27,6 +27,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
+        public static final int ColDate=0x7f090017;
         public static final int ColItemID=0x7f090018;
         public static final int ColName=0x7f090019;
         public static final int ColQuantity=0x7f09001e;
@@ -52,7 +53,6 @@ public final class R {
         public static final int tableRow4=0x7f09000a;
         public static final int tableRow5=0x7f09000d;
         public static final int tableRow6=0x7f090010;
-        public static final int textView1=0x7f090017;
         public static final int textView2=0x7f090004;
         public static final int textView3=0x7f090008;
         public static final int textView4=0x7f09000b;

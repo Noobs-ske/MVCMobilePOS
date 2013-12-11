@@ -50,8 +50,8 @@ public class InventoryScreen extends Activity {
 						CatalogScreen.class);
 
 			
-				  newActivity.putStringArrayListExtra("PurchaseList",
-				  PurchaseList); PurchaseList = new ArrayList<String>();
+				  newActivity.putStringArrayListExtra("PurchaseList",PurchaseList); 
+				  PurchaseList = new ArrayList<String>();
 				 
 
 				startActivity(newActivity);

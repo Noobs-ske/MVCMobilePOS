@@ -1,12 +1,16 @@
 package com.example.mvcmobilepos;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import com.example.mvcmobilepos.DBClass;
 import com.example.mvcmobilepos.R;
 
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.ContextMenu;
@@ -55,7 +59,9 @@ public class CartScreen extends Activity {
 				// Perform action on click
 				btn_Checkout.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
+						//saveTime();
 						Checkout();
+						
 						Intent newActivity = new Intent(CartScreen.this,
 								InventoryScreen.class);
 						
@@ -68,16 +74,26 @@ public class CartScreen extends Activity {
 				
 	}
 
-	
+	@SuppressLint("SimpleDateFormat")
+	public void saveTime(String name, String id, String quan, String price){
+		
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat asf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		String now = asf.format(c.getTime());
+		HistoryDB reportDB = new HistoryDB(this);
+		for(int i=0;i<SaleList.size();i++){
+		reportDB.InsertData(id, now, name, quan, price);
+		}
+		
+	}
 	public void Checkout() {
 		DBClass myDb = new DBClass(this);
-
 		for (int i = 0; i < SaleList.size(); i++) {
 			String arrDataDB[] = myDb.SelectData(SaleList.get(i));
 			String arrDataSale[] = myDb.SelectData2(SaleList.get(i));
+			saveTime(arrDataDB[1], arrDataDB[2], arrDataSale[2], "99");
 			myDb.reduceQuantity(arrDataDB[0] ,arrDataDB[1] , Integer.parseInt(arrDataDB[2]) 
 				 , Integer.parseInt(arrDataSale[2]), arrDataDB[3]);
-			myDb.DeleteData2(SaleList.get(i));
 			myDb.DeleteData2(SaleList.get(i));
 		}
 		SaleList = null;
@@ -102,6 +118,9 @@ public class CartScreen extends Activity {
 			MyArrList.add(map);
 		}
 		ItemList = MyArrList;
+		
+		
+		
 		// listView1
 		ListView lisView1 = (ListView) findViewById(R.id.listView1);
 
@@ -135,8 +154,10 @@ public class CartScreen extends Activity {
 		int menuItemIndex = item.getItemId();
 		String[] menuItems = getResources().getStringArray(R.array.CmdMenu);
 		String CmdName = menuItems[menuItemIndex];
-		String MemID = ItemList.get(info.position).get("MemberID").toString();
-		String MemName = ItemList.get(info.position).get("Name").toString();
+		final String MemID = ItemList.get(info.position).get("ItemID").toString();
+//		final String MemName = ItemList.get(info.position).get("Name").toString();
+//		final String MemQuantity = ItemList.get(info.position).get("Quantity").toString();
+//		final String MemPrice = ItemList.get(info.position).get("Price").toString();
 		
 
 		if ("Delete".equals(CmdName)) {

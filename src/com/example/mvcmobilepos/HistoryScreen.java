@@ -13,21 +13,13 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 public class HistoryScreen extends Activity {
-	ArrayList<String> CartList = new ArrayList<String>();
-	ArrayList<String> SaleList;
+//	ArrayList<String> CartList = new ArrayList<String>();
 	private ArrayList<HashMap<String, String>> ItemList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_history);
-		Intent intent = getIntent();
-		SaleList = intent.getStringArrayListExtra("PurchaseList");
-//		Intent newActivity = new Intent(HistoryScreen.this,
-//				CatalogScreen.class);
-//		newActivity.putStringArrayListExtra("PurchaseList",
-//				SaleList);
-		
 		
 		ShowAllData();
 		// Button1(BackButton)
@@ -47,17 +39,19 @@ public class HistoryScreen extends Activity {
 	}
 
 	public void ShowAllData() {
-		final DBClass myDb = new DBClass(this);
-		ItemList = myDb.SelectAllData();
+		final HistoryDB reportDB = new HistoryDB(this);
+		final DBClass db = new DBClass(this);
+		ItemList = db.SelectAllData();
 		
 		// listView1
 		ListView lisView1 = (ListView) findViewById(R.id.listView2);
 
 		SimpleAdapter sAdap;
 		sAdap = new SimpleAdapter(HistoryScreen.this, ItemList,
-				R.layout.activity_historycolumn, new String[] { "ItemID", "Name",
-						"Quantity", "Price" }, new int[] { R.id.ColItemID,
+				R.layout.activity_historycolumn, new String[] { "ProductSaleDate", "ProductName",
+						"ProductSoldQuantity", "ProductLinePrice" }, new int[] { R.id.ColDate,
 						R.id.ColName, R.id.ColQuantity, R.id.TotalPrice });
+		
 		lisView1.setAdapter(sAdap);
 		registerForContextMenu(lisView1);
 

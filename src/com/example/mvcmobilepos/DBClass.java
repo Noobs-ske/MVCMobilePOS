@@ -15,7 +15,7 @@ import android.util.Log;
 public class DBClass extends SQLiteOpenHelper {
 
 	// Database Version
-	private static final int DATABASE_VERSION = 9;
+	private static final int DATABASE_VERSION = 13;
 
 	// Database Name
 	private static final String DATABASE_NAME = "mydatabase";
@@ -27,7 +27,7 @@ public class DBClass extends SQLiteOpenHelper {
 	private static final String TABLE_PURCHASE = "Purchase";
 
 	// Table Name
-		private static final String TABLE_HISTORY = "History";
+	private static final String TABLE_HISTORY = "History";
 		
 	public DBClass(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -47,9 +47,8 @@ public class DBClass extends SQLiteOpenHelper {
 				+ " Name TEXT(100)," + " Quantity TEXT(100), " 
 				+ " Price TEXT(100)," + " Description TEXT(100));");
 		db.execSQL("CREATE TABLE " + TABLE_HISTORY
-				+ "(ItemID3 INTEGER PRIMARY KEY AUTOINCREMENT,"
-				+ " Name TEXT(100)," + " Quantity TEXT(100), " 
-				+ " Price TEXT(100)," + " Description TEXT(100));");
+				+ "(Date TEXT(100)," + " Name TEXT(100)," + " Quantity TEXT(100), " 
+				+ " Price TEXT(100))");
 		
 		
 
@@ -128,34 +127,24 @@ public class DBClass extends SQLiteOpenHelper {
 
 	}
 	
+
 	
-	
-	
-	// Insert History Data
-		public long InsertData3(String strItemID, String strName, String strQuantity, String strPrice) {
+		// Insert History Data	
+		public long InsertData3( String strDate, String strName, String strQuantity, String strPrice) {
 			// TODO Auto-generated method stub
 
 			try {
 				SQLiteDatabase db;
 				db = this.getWritableDatabase(); // Write Data
 
-				/**
-				 * for API 11 and above SQLiteStatement insertCmd; String strSQL =
-				 * "INSERT INTO " + TABLE_MEMBER +
-				 * "(ItemID,Name,Quantity,Price) VALUES (?,?,?)";
-				 * 
-				 * insertCmd = db.compileStatement(strSQL); insertCmd.bindString(1,
-				 * strItemID); insertCmd.bindString(2, strName);
-				 * insertCmd.bindString(3, strTel); return
-				 * insertCmd.executeInsert();
-				 */
-
 				ContentValues Val = new ContentValues();
-				Val.put("ItemID3", strItemID);
+				
+				Val.put("Date",strDate);
+			//	Val.put("ItemID", strItemID);
 				Val.put("Name", strName);
 				Val.put("Quantity", strQuantity);
 				Val.put("Price", strPrice);
-				//Val.put("Description",strDescription);
+				
 				long rows = db.insert(TABLE_HISTORY, null, Val);
 
 				db.close();
@@ -166,7 +155,7 @@ public class DBClass extends SQLiteOpenHelper {
 			}
 
 		}
-	
+		
 
 	// Select Data
 	@SuppressLint("NewApi")
@@ -246,7 +235,7 @@ public class DBClass extends SQLiteOpenHelper {
 
 	
 	@SuppressLint("NewApi")
-	public String[] SelectData3(String strItemID) {
+	public String[] SelectData3(String strName) {
 		// TODO Auto-generated method stub
 
 		try {
@@ -256,20 +245,20 @@ public class DBClass extends SQLiteOpenHelper {
 			db = this.getReadableDatabase(); // Read Data
 
 			Cursor cursor = db.query(false, TABLE_HISTORY, new String[] { "*" },
-					"ItemID3=?", new String[] { String.valueOf(strItemID) },
+					"ItemName3=?", new String[] { String.valueOf(strName) },
 					null, null, null, null,null);
 
 			if (cursor != null) {
 				if (cursor.moveToFirst()) {
 					arrData = new String[cursor.getColumnCount()];
 					/***
-					 * 0 = ItemID , 1 = Name , 2 = Quantity , 3 = Price , 4 = Description
+					 * 0 = Date, 1 = Name , 2 = Quantity , 3 = Price
 					 */
 					arrData[0] = cursor.getString(0);
 					arrData[1] = cursor.getString(1);
 					arrData[2] = cursor.getString(2);
 					arrData[3] = cursor.getString(3);
-					arrData[4] = cursor.getString(4);
+//					arrData[4] = cursor.getString(4);
 				}
 			}
 			cursor.close();
@@ -469,17 +458,19 @@ public class DBClass extends SQLiteOpenHelper {
 						SQLiteDatabase db;
 						db = this.getReadableDatabase(); // Read Data
 
-						String strSQL = "SELECT  * FROM " + TABLE_PURCHASE;
+						String strSQL = "SELECT  * FROM " + TABLE_HISTORY;
 						Cursor cursor = db.rawQuery(strSQL, null);
 
-						if (cursor != null) {
+						if (cursor != null) 
+						{
 							if (cursor.moveToFirst()) {
 								do {
 									map = new HashMap<String, String>();
-									map.put("ItemID3", cursor.getString(0));
-									map.put("Name", cursor.getString(1));
-									map.put("Quantity", cursor.getString(2));
-									map.put("Price", cursor.getString(3));
+									map.put("Date", cursor.getString(0));
+									map.put("ItemID3", cursor.getString(1));
+									map.put("Name", cursor.getString(2));
+									map.put("Quantity", cursor.getString(3));
+									map.put("Price", cursor.getString(4));
 									MyArrList.add(map);
 								} while (cursor.moveToNext());
 							}
@@ -537,6 +528,7 @@ public class DBClass extends SQLiteOpenHelper {
 		// TODO Auto-generated method stub
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCT);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PURCHASE);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_HISTORY);
 
 		// Re Create on method onCreate
 		onCreate(db);
@@ -551,13 +543,13 @@ public class DBClass extends SQLiteOpenHelper {
 		UpdateData(ID, name, left2, price);
 	}
 
-	public void increaseQuantity(String ID ,String name , int current , int purchase, String price)
-	{
-		int currentquan = current;
-		int purchasequan = purchase;
-		int newquan = currentquan + purchasequan;
-		String newquan2 = newquan+"";
-		UpdateData(ID, name, newquan2, price);
-	}
+//	public void increaseQuantity(String ID ,String name , int current , int purchase, String price)
+//	{
+//		int currentquan = current;
+//		int purchasequan = purchase;
+//		int newquan = currentquan + purchasequan;
+//		String newquan2 = newquan+"";
+//		UpdateData(ID, name, newquan2, price);
+//	}
 	
 }

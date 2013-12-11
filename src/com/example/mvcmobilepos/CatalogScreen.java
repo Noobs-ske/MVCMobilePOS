@@ -133,9 +133,7 @@ public class CatalogScreen extends Activity {
 		            PurchaseQuantity = Integer.parseInt(inputQuantity.getText().toString());
 		           
 		            int n = Integer.parseInt(MemQuantity)- PurchaseQuantity;
-		        //    double m = n*(Double.parseDouble(MemPrice)/Double.parseDouble(MemQuantity)) ;
-		//           String n2 = n+"";
-		        //    String price = m+"";
+		        
 		            String PurQuantity = PurchaseQuantity+""; 
 		            if(PurchaseQuantity > Integer.parseInt(MemQuantity))
 		            {
@@ -145,15 +143,10 @@ public class CatalogScreen extends Activity {
 		            }
 		            else {       
 		            	PurchaseList.add(MemID);
-//		            		myDb.reduceQuantity(MemID, MemName, Integer.parseInt(MemQuantity), PurchaseQuantity, MemPrice);
+
 		            		myDb.InsertData2(MemID, MemName, PurQuantity, MemPrice);
-		            		//ShowListData();
-		//            if(Integer.parseInt(n2) <= 0)
-		//            {
-		//           	m2 = "0";
-		//            }
-		//            myDb.UpdateData(MemID, MemName, n2, m2);
-		            
+		            		ShowListData();
+		
 		            	}
 		            		
 		            	
